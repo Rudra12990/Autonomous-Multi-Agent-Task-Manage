@@ -1,0 +1,9 @@
+google-genai
+python-dotenv
+fastapi
+uvicorn
+supabase
+pydantic
+httpx
+rich
+tenacity

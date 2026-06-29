@@ -1,0 +1,216 @@
+/* ==========================================
+   🌓 UNIFIED GLOBAL THEMATIC ROOT DEFINITIONS
+   ========================================== */
+:root {
+    --bg-gradient: radial-gradient(circle at center, #060913 0%, #030408 100%);
+    --panel-bg: rgba(15, 23, 42, 0.65);
+    --panel-border: rgba(255, 255, 255, 0.08);
+    --text-primary: #f1f5f9;
+    --text-caption: #94a3b8;
+    --textarea-bg: rgba(5, 7, 12, 0.8);
+    --tab-inactive: rgba(255, 255, 255, 0.05);
+}
+
+body.light-theme {
+    --bg-gradient: radial-gradient(circle at center, #f1f5f9 0%, #cbd5e1 100%);
+    --panel-bg: rgba(255, 255, 255, 0.8);
+    --panel-border: rgba(15, 23, 42, 0.1);
+    --text-primary: #0f172a;
+    --text-caption: #475569;
+    --textarea-bg: rgba(255, 255, 255, 0.95);
+    --tab-inactive: rgba(15, 23, 42, 0.05);
+}
+
+/* Core Layout Design */
+body {
+    background: var(--bg-gradient) !important;
+    color: var(--text-primary) !important;
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    margin: 0;
+    padding: 40px;
+    min-height: 100vh;
+    box-sizing: border-box;
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+#bg-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1;
+    pointer-events: none;
+}
+
+/* Banner Title Hub */
+.hud-container {
+    text-align: center;
+    margin-bottom: 50px;
+    animation: fadeInDown 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.hud-container h1 {
+    font-size: 2.2rem;
+    font-weight: 800;
+    letter-spacing: 1px;
+    background: linear-gradient(135deg, #00ffcc 0%, #a855f7 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin: 0;
+}
+.subtitle {
+    color: #64748b;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    margin-top: 8px;
+    text-transform: uppercase;
+}
+.status-online {
+    color: #00ffcc;
+    text-shadow: 0 0 10px rgba(0, 255, 204, 0.4);
+}
+
+/* Workspace Panels layout grid */
+.workspace-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    max-width: 1300px;
+    margin: 0 auto;
+    animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.panel {
+    background: var(--panel-bg) !important;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--panel-border) !important;
+    border-radius: 16px;
+    padding: 35px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+.panel:hover {
+    border-color: rgba(0, 255, 204, 0.25);
+    box-shadow: 0 25px 50px rgba(0, 255, 204, 0.05);
+}
+.panel h2 {
+    margin-top: 0;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--text-primary) !important;
+}
+.panel-caption {
+    color: var(--text-caption) !important;
+    font-size: 0.9rem;
+    margin-bottom: 20px;
+    font-family: monospace;
+}
+
+/* Input Components Area */
+textarea {
+    width: 100%;
+    height: 260px;
+    background-color: var(--textarea-bg) !important;
+    color: var(--text-primary) !important;
+    border: 1px solid var(--panel-border) !important;
+    border-radius: 8px;
+    padding: 16px;
+    box-sizing: border-box;
+    font-family: 'Fira Code', monospace;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    resize: none;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+textarea:focus {
+    border-color: #00ffcc !important;
+    outline: none;
+    box-shadow: 0 0 15px rgba(0, 255, 204, 0.15);
+}
+
+button {
+    width: 100%;
+    background: linear-gradient(135deg, #00ffcc 0%, #a855f7 100%);
+    color: #060913;
+    border: none;
+    border-radius: 8px;
+    padding: 16px;
+    font-size: 0.95rem;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 20px;
+    letter-spacing: 1px;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 255, 204, 0.3);
+    opacity: 0.95;
+}
+
+.status-box {
+    background-color: var(--textarea-bg) !important;
+    border: 1px solid var(--panel-border) !important;
+    color: var(--text-caption) !important;
+    padding: 20px;
+    font-size: 0.9rem;
+    font-family: monospace;
+    border-radius: 8px;
+    line-height: 1.6;
+}
+
+/* Output Data tabs layout mechanics */
+.hidden { display: none !important; }
+.result-matrix {
+    margin-top: 30px;
+    border-top: 1px solid var(--panel-border);
+    padding-top: 25px;
+}
+.tabs { display: flex; gap: 10px; margin-bottom: 20px; }
+.tab-btn {
+    background: var(--tab-inactive) !important;
+    color: var(--text-caption) !important;
+    padding: 10px 20px;
+    font-size: 0.85rem;
+    border-radius: 6px;
+    width: auto;
+    margin: 0;
+    border: none;
+    cursor: pointer;
+}
+.tab-btn.active {
+    background: #00ffcc !important;
+    color: #060913 !important;
+    box-shadow: 0 4px 15px rgba(0, 255, 204, 0.25);
+}
+.tab-content {
+    display: none;
+    background: var(--textarea-bg) !important;
+    border: 1px solid var(--panel-border) !important;
+    padding: 20px;
+    border-radius: 8px;
+    max-height: 300px;
+    overflow-y: auto;
+}
+.tab-content.active { display: block; }
+pre { margin: 0; color: #a7f3d0; font-size: 0.85rem; font-family: 'Fira Code', monospace; }
+
+/* Typing Feedback Jiggle Properties */
+@keyframes consoleJiggle {
+    0% { transform: translate(0, 0); }
+    25% { transform: translate(-0.5px, 0.5px); }
+    50% { transform: translate(0.5px, -0.5px); }
+    75% { transform: translate(-0.5px, -0.5px); }
+    100% { transform: translate(0, 0); }
+}
+.jiggle-active {
+    animation: consoleJiggle 0.08s ease-in-out;
+    border-color: #00ffcc !important;
+    box-shadow: 0 0 20px rgba(0, 255, 204, 0.3) !important;
+}
+
+@keyframes fadeInDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }

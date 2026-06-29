@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OpsMind Multi-Agent Console</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+    <canvas id="bg-canvas"></canvas>
+
+    <div class="hud-container">
+        <h1>⚡ OPSMIND // MULTI-AGENT WORKSPACE</h1>
+        <p class="subtitle">SYSTEM CORE ARCHITECTURE: <span class="status-online">ONLINE</span></p>
+        
+        <div style="margin-top: 15px;">
+            <button id="themeToggleBtn" onclick="toggleGlobalTheme()" style="width: auto; padding: 8px 16px; font-size: 11px; margin: 0;">🌓 SWITCH THEME MODE</button>
+        </div>
+    </div>
+
+    <div class="workspace-grid">
+        <div class="panel">
+            <h2>📥 Ingestion Matrix</h2>
+            <p class="panel-caption">> _awaiting_unstructured_payload_stream</p>
+            <textarea id="logInput" placeholder="Paste unformatted text notes here (e.g., Deploying patch v4.2.1 this Sunday at 2 AM...)"></textarea>
+            <button id="submitBtn" onclick="runPipeline()">🚀 PROCESS SYSTEM PIPELINE</button>
+        </div>
+
+        <div class="panel">
+            <h2>🔮 Processing Stream</h2>
+            <p class="panel-caption">> _live_orchestration_feed_telemetry</p>
+            
+            <div id="statusConsole" class="status-box">
+                > System Idle. Awaiting engineering telemetry input tokens...
+            </div>
+
+            <div id="resultMatrix" class="result-matrix hidden">
+                <div class="tabs">
+                    <button class="tab-btn active" onclick="switchTab(event, 'researchTab')">Properties</button>
+                    <button class="tab-btn" onclick="switchTab(event, 'complianceTab')">Compliance</button>
+                    <button class="tab-btn" onclick="switchTab(event, 'ledgerTab')">Immutable Log</button>
+                </div>
+
+                <div id="researchTab" class="tab-content active"><pre id="researchOutput"></pre></div>
+                <div id="complianceTab" class="tab-content"><pre id="complianceOutput"></pre></div>
+                <div id="ledgerTab" class="tab-content"><pre id="ledgerOutput"></pre></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('bg-canvas');
+        const ctx = canvas.getContext('2d');
+        
+        let width = canvas.width = window.innerWidth;
+        let height = canvas.height = window.innerHeight;
+        
+        const dots = [];
+        const maxDots = 55;
+        
+        for (let i = 0; i < maxDots; i++) {
+            dots.push({
+                x: Math.random() * width,
+                y: Math.random() * height,
+                vx: (Math.random() - 0.5) * 0.5,
+                vy: (Math.random() - 0.5) * 0.5,
+                r: Math.random() * 1.5 + 1
+            });
+        }
+        
+        function renderAnimationLoop() {
+            ctx.clearRect(0, 0, width, height);
+            
+            const isLightMode = document.body.classList.contains("light-theme");
+            
+            if (isLightMode) {
+                ctx.fillStyle = 'rgba(168, 85, 247, 0.45)';    
+                ctx.strokeStyle = 'rgba(15, 23, 42, 0.05)';    
+            } else {
+                ctx.fillStyle = 'rgba(0, 255, 204, 0.55)';    
+                ctx.strokeStyle = 'rgba(0, 255, 204, 0.08)';   
+            }
+            
+            for (let i = 0; i < maxDots; i++) {
+                let d1 = dots[i];
+                d1.x += d1.vx;
+                d1.y += d1.vy;
+                
+                if (d1.x < 0 || d1.x > width) d1.vx *= -1;
+                if (d1.y < 0 || d1.y > height) d1.vy *= -1;
+                
+                ctx.beginPath();
+                ctx.arc(d1.x, d1.y, d1.r, 0, Math.PI * 2);
+                ctx.fill();
+                
+                for (let j = i + 1; j < maxDots; j++) {
+                    let d2 = dots[j];
+                    let dist = Math.hypot(d1.x - d2.x, d1.y - d2.y);
+                    if (dist < 140) {
+                        ctx.beginPath();
+                        ctx.moveTo(d1.x, d1.y);
+                        ctx.lineTo(d2.x, d2.y);
+                        ctx.stroke();
+                    }
+                }
+            }
+            requestAnimationFrame(renderAnimationLoop);
+        }
+        
+        window.addEventListener('resize', () => {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+        });
+        
+        renderAnimationLoop();
+    </script>
+    <script src="/static/script.js"></script>
+</body>
+</html>
